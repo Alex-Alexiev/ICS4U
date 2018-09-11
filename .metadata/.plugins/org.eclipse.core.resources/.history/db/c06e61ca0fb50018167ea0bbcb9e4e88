@@ -1,0 +1,21 @@
+package linkedlist;
+
+public class IntNode {
+	
+	private int data;
+	private IntNode next;
+	private IntNode previous;
+	
+	public IntNode(int data, IntNode link) {
+		super();
+		this.data = data;
+		this.next = link;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "IntNode [current=" + data + ", next=" + next.getData() + "]";
+	}
+}

@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class AddressBookDriver {
+	
+	public static Scanner in = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		AddressBook contacts = new AddressBook();
+		
+		while(true) {
+			String input = in.nextLine();
+			if (input.toLowerCase().equals("add")) {
+				
+			}
+			if (input.toLowerCase().equals("remove")) {
+				
+			}
+			if (input.toLowerCase().equals("search")) {
+				
+			}
+		}
+
+	}
+
+}

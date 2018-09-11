@@ -1,0 +1,34 @@
+
+public class AddressBook {
+
+	private Contact[] contacts;
+	
+	public AddressBook() {
+		
+	}
+	
+	public void addContact(Contact c) {
+		Contact[] newContacts = new Contact[contacts.length];
+		for (int i = 0; i < contacts.length; i++) {
+			newContacts[i] = contacts[i];
+		}
+		newContacts[newContacts.length-1] = c;
+		contacts = newContacts;
+	}
+	
+	public void removeContact(Contact c) {
+		
+	}
+	
+	public Contact search(String lastName) {
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+}

@@ -1,0 +1,38 @@
+package linkedlist;
+
+public class IntLinkedList {
+	
+	private IntNode head;
+	private IntNode current;
+
+	public IntLinkedList(IntNode head) {
+		super();
+		this.head = head;
+		this.current = head;
+	}
+
+	public IntLinkedList() {
+		super();
+		head = null;
+	}
+	
+	public void insertFront(int value) {
+		head = new IntNode(value, head);
+		current = head;
+	}
+	
+	public void insert(int value) {
+		if (isEmpty()) {
+			insertFront(value);
+		}
+		current.setLink(new IntNode(value, current.getLink()));
+		current = current.getLink();
+	}
+	
+	public boolean isEmpty() {
+		return head == null;
+	}
+	
+	
+
+}

@@ -1,0 +1,4 @@
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Some more comments</message>\r\n<message>Type &apos;p&apos; to use previous command.</message>\r\n<message>More little bug fixes.</message>\r\n<message>Little bug fixes.</message>\r\n<message>Changed NPC data file again.</message>\r\n<message>Added ability to pick up all items in a room at once.</message>\r\n<message>Fixed multiple monster combat and upgraded poison messages.</message>\r\n<message>The npc data file is now called npcText.dat. I have no clue why it&\#x0A;suddenly started working once I changed the name to that...</message>\r\n<message>Small vocab change</message>\r\n<message>Exits game when you ebat heart of the island.</message>\r\n</messages>
+eclipse.preferences.version=1
+resourcehistory_graph_split=500,500
+resourcehistory_rev_split=700,300

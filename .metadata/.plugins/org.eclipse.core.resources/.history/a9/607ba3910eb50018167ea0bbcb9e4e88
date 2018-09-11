@@ -1,0 +1,31 @@
+package linkedlist;
+
+public class IntNode {
+	
+	private int data;
+	private IntNode link;
+	
+	public IntNode(int data, IntNode link) {
+		super();
+		this.data = data;
+		this.link = link;
+	}
+	
+	public int getData() {
+		return data;
+	}
+	public void setData(int data) {
+		this.data = data;
+	}
+	public IntNode getLink() {
+		return link;
+	}
+	public void setLink(IntNode link) {
+		this.link = link;
+	}
+
+	@Override
+	public String toString() {
+		return "IntNode [data=" + data + ", link=" + link.getData() + "]";
+	}
+}

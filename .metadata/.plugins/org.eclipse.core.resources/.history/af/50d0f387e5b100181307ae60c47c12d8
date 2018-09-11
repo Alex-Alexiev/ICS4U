@@ -1,0 +1,13 @@
+public class AddressBookDriver {
+
+	public static void main(String[] args) {
+		AddressBook contacts = new AddressBook();
+		contacts.addContact(new Contact("af", "al", "1"));
+		contacts.addContact(new Contact("af", "al", "1"));
+		contacts.addContact(new Contact("af", "al", "1"));
+		
+		
+
+	}
+
+}

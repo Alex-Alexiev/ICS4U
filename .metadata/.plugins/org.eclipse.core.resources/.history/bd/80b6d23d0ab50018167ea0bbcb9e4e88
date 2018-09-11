@@ -1,0 +1,41 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class AddressBookDriver {
+	
+	public static Scanner in = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		AddressBook contacts = new AddressBook();
+		
+		while(true) {
+			String input = in.nextLine();
+			if (input.toLowerCase().equals("add")) {
+				Contact c = new Contact();
+				c.setFirstName(in.next());
+				c.setLastName(in.next());
+				c.setPhone(in.next());
+				contacts.addContact(c);
+			}
+			if (input.toLowerCase().equals("remove")) {
+				
+			}
+			if (input.toLowerCase().equals("search")) {
+				Contact[] c = contacts.search(in.next());
+				if (c != null) {
+					for (Contact con : c) {
+						System.out.println(con);
+					}
+				}
+			}
+			if (input.toLowerCase().equals("show")) {
+				Arrays.sort(contacts);
+				System.out.println(contacts);
+			}
+		}
+
+	}
+
+	
+}

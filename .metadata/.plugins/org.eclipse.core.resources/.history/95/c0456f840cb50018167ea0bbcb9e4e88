@@ -1,0 +1,19 @@
+package linkedlist;
+
+public class IntLinkedList {
+	
+	private IntNode head;
+
+	public IntLinkedList(IntNode head) {
+		super();
+		this.head = head;
+	}
+
+	public IntLinkedList() {
+		super();
+		head = null;
+	}
+	
+	
+
+}
