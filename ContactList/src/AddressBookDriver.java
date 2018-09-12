@@ -16,18 +16,21 @@ public class AddressBookDriver {
 				c.setPhone(in.next());
 				contacts.addContact(c);
 			}
+			
 			if (input.toLowerCase().equals("remove")) {
-				Contact[] c = contacts.search(in.next());
+				Contact[] c = contacts.search(in.nextLine());
 				if (c != null) {
 					for (Contact con : c) {
 						System.out.println(con);
 					}
 					System.out.println("which");
-					contacts.removeContact(c[in.nextInt()-1]);
+					Contact temp = c[in.nextInt()-1];
+					contacts.removeContact(temp);
+					System.out.println(temp.getFirstName() + " removed");
 				} else {
 					System.out.println("ivalid input");
 				}
-			}
+			} 
 			if (input.toLowerCase().equals("search")) {
 				Contact[] c = contacts.search(in.next());
 				if (c != null) {

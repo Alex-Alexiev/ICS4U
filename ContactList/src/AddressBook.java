@@ -1,42 +1,33 @@
-import java.util.Arrays;
-
 public class AddressBook {
 
-	private Contact[] contacts;
+	private LinkedList contacts;
 	
 	public AddressBook() {
-		contacts = new Contact[0];
+		contacts = new LinkedList();
 	}
 	
 	public void addContact(Contact c) {
-		Contact[] newContacts = new Contact[contacts.length+1];
-		for (int i = 0; i < contacts.length; i++) {
-			newContacts[i] = contacts[i];
-		}
-		newContacts[newContacts.length-1] = c;
-		contacts = newContacts;
+		contacts.insert(c);
 	}
 	
 	public void removeContact(Contact c) {
-		Contact[] newContacts = new Contact[contacts.length-1];
-		for (int i = 0; i < contacts.length-1; i++) {
-			newContacts[i] = contacts[i];
-		}
-		contacts = newContacts;
+		contacts.remove(c);
 	}
 	
 	public Contact[] search(String lastName) {
-		Contact[] foundContacts = new Contact[contacts.length]; 
+		Contact[] foundContacts = new Contact[contacts.getLength()]; 
 		int ind = 0;
-		for (int i = 0; i < foundContacts.length; i++) {
-			if (contacts[i].getLastName().equals(lastName)) {
-				foundContacts[ind] = contacts[i];
+		contacts.resetCurrent();
+		while(contacts.getCurrent() != null) {
+			if (contacts.getCurrent().getLastName().equals(lastName)) {
+				foundContacts[ind] = contacts.getCurrent();
 				ind++;
 			}
+			contacts.next();
 		}
 		for (int i = 0; i < foundContacts.length; i++) {
 			if (foundContacts[i] == null) {
-				Contact[] ret = new Contact[i+1];
+				Contact[] ret = new Contact[i];
 				for (int j = 0; j < ret.length; j++) {
 					ret[j] = foundContacts[j];
 				}
@@ -48,13 +39,15 @@ public class AddressBook {
 	
 	public String toString() {
 		String ret = "";
-		for (Contact c : contacts) {
-			ret += c+"\n";
+		contacts.resetCurrent();
+		while(contacts.getCurrent() != null) {
+			ret += contacts.getCurrent()+"\n";
+			contacts.next();
 		}
 		return ret;
 	}
 	
 	public void sort() {
-		Arrays.sort(contacts);
+		//Arrays.sort(contacts);
 	}
 }
