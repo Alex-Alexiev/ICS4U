@@ -3,7 +3,7 @@ package linkedlist;
 public class IntLinkedList {
 	
 	private IntNode head;
-	private IntNode current;
+	private IntNode current; 
 
 	public IntLinkedList(IntNode head) {
 		super();
@@ -13,8 +13,13 @@ public class IntLinkedList {
 
 	public IntLinkedList() {
 		super();
-		head = null;
+		this.head = null;
+		this.current = null;
 	}
+	
+	/*
+	 * Insert after current
+	 */
 	
 	public void insert(int value) {
 		if (isEmpty()) {
@@ -22,18 +27,29 @@ public class IntLinkedList {
 			current = head;
 		}
 		else {
-			current.setNext(new IntNode(value, current.getNext()));
+			current.setNext(new IntNode(value, current, current.getNext()));
 			current = current.getNext();
 		}
 	}
+	
+	/*
+	 * Remove current, 
+	 * current becomes the one before it
+	 */
 	
 	public void remove() {
 		if (current == head) {
 			head = current.getNext();
 			current = head;
 		}
+		if (current.getNext() == null) {
+			current.getPrevious().setNext(null);
+			current = current.getPrevious();
+		}
 		else {
-			
+			current.getPrevious().setNext(current.getNext());
+			current.getNext().setPrevious(current.getPrevious());
+			current = current.getPrevious();
 		}
 	}
 	
@@ -41,6 +57,14 @@ public class IntLinkedList {
 		return head == null;
 	}
 	
-	
+	public String toString() {
+		String ret = "";
+		IntNode curr = head;
+		while(curr != null) {
+			ret+=curr;
+			curr = curr.getNext();
+		}
+		return ret;
+	}
 
 }

@@ -53,6 +53,10 @@ public class IntNode {
 
 	@Override
 	public String toString() {
-		return "IntNode [current=" + data + ", next=" + next.getData() + "]";
+		if (getNext() != null) {
+			return "IntNode [current=" + data + ", next=" + next.getData() + "] ";
+		} else {
+			return "IntNode [current=" + data + "] ";
+		}
 	}
 }
