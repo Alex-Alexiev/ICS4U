@@ -24,7 +24,7 @@ public class Main {
 		 */
 		while (filledRows < n) {
 			/*
-			 *if q queen can be placed at the column, then 
+			 *if a queen can be placed at the column, then 
 			 *add it to the stack of queens at that position
 			 *and reset the col back to 0, and increment filledRows
 			 *to move on to the next row 
@@ -44,7 +44,7 @@ public class Main {
 			/*
 			 * if there are no more columns left to check then 
 			 * move back to the previous row and continue
-			 * checking spots for the queen on that row to the right
+			 * checking spots for the queen on that row to the right.
 			 * if the stack of queens if empty, which means you are on
 			 * the first row of the board, and you are at the last column, 
 			 * return that it is impossible
