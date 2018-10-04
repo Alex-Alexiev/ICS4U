@@ -1,4 +1,4 @@
-package hashmap;
+package map;
 import java.util.Comparator;
 
 public class Contact implements Comparable<Contact>{
@@ -62,7 +62,7 @@ public class Contact implements Comparable<Contact>{
 	}
 	
 	public void updateKey() {
-		key = phone+firstName+lastName;
+		key = (lastName+firstName+phone).toLowerCase();
 	}
 	
 	public String getKey() {
@@ -77,14 +77,5 @@ public class Contact implements Comparable<Contact>{
 		}
 		return ret;
 	}
-	
-	public static Comparator<Contact> ContactNameComparator = new Comparator<Contact>() {
-		@Override
-		public int compare(Contact arg0, Contact arg1) {
-			return arg0.compareTo(arg1);
-		}
-	};
 
-	
-	
 }
