@@ -58,7 +58,7 @@ public class Contact implements Comparable<Contact>{
 	}
 	
 	public String toString() {
-		return "First Name: "+getFirstName()+" Last Name: "+getLastName()+" Phone Number: "+getPhone();
+		return getLastName() + ", " + getFirstName() + ", " + getPhone();
 	}
 	
 	public void updateKey() {
