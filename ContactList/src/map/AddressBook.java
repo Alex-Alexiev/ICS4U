@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/*
+ * Uses a TreeMap<String, Contact> to store 
+ * all the contacts in the AddressBook
+ */
+
 public class AddressBook {
 
 	private Map<String, Contact> contacts;
@@ -29,6 +34,10 @@ public class AddressBook {
 		return contacts.size();
 	}
 	
+	/*
+	 * Returns a List<Contact> of contacts whose key's have
+	 * the searchParam inside of them
+	 */
 	public List<Contact> search(String searchParam) {
 		List<Contact> foundContacts = new ArrayList<Contact>();
 		for (String key : contacts.keySet()) {
@@ -40,6 +49,9 @@ public class AddressBook {
 	}
 
 	public String toString() {
+		if (contacts.size() <= 0) {
+			return "There are no contacts in your contact list";
+		}
 		String ret = "";
 		for (String key : contacts.keySet()) {
 			ret += "" + contacts.get(key) + "\n";

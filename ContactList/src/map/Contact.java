@@ -6,10 +6,6 @@ public class Contact implements Comparable<Contact> {
 	private String phone;
 	private String key;
 
-	public Contact() {
-
-	}
-
 	public Contact(String firstName, String lastName, String phone) {
 		super();
 		this.firstName = firstName;
