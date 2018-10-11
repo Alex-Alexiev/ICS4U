@@ -3,9 +3,10 @@ package heap;
 public class BinaryTree {
 	
 	Node[] tree;
-	int layers;
+	int layers, size;
 	
 	public BinaryTree(int[] array) {
+		this.size = array.length;
 		this.layers = (int)((Math.log(array.length)/Math.log(2))+2);
 		tree = new Node[(int)Math.pow(2, layers)];
 		for (int i = 0; i < array.length; i++) {
@@ -14,6 +15,10 @@ public class BinaryTree {
 		for (int i = 1; i < array.length + 1; i++) {
 			tree[i].setChildren(tree[2*i+1], tree[2*i+1]);
 		} 
+	}
+	
+	public int size() {
+		return size;
 	}
 	
 	public int getLayers() {
@@ -36,6 +41,14 @@ public class BinaryTree {
 
 	public Node get(int index) {
 		return tree[index];
+	}
+	
+	public void set(int index, int value) {
+		tree[index].setValue(value);
+	}
+	
+	public void remove(int index) {
+		tree[index] = null;
 	}
 	
 	public int getValue(int index) {

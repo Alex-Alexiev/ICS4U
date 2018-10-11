@@ -12,19 +12,39 @@ public class Heap {
 		this.tree = tree;
 	}
 	
+	public int size() {
+		return tree.size();
+	}
+	
+	public static void sort(int[] nums) {
+		Heap heap = new Heap(nums);
+		for (int i = 0; i < nums.length; i++) {
+			heap.heapify();
+			nums[i] = heap.remove(1);
+		}
+	}
+	
+	public int remove(int index) {
+		int ret = tree.getValue(index);
+		tree.swap(index, tree.size());
+		tree.remove(tree.size());
+		return ret;
+	}
+	
 	/*
 	 * Start from the farthest right on the second last row
 	 * and run siftDown on each element 
 	 */
 	public void heapify() {
 		for (int l = tree.getLayers() -1; l >= 0; l--) {
-			for (int i = Math.pow(2,l); i > Math.pow(2,l-1); i--) {
-				heapify(i);
+			for (int i = (int)Math.pow(2,l)-1; i > Math.pow(2,l-1)-1; i--) {
+				siftDown(i);
 			}
 		}
 	}
 
 	public void siftDown(int index) {
+		if (index < 1) return;
 		int curr = index;
 		int leftChild = index*2;
 		int rightChild = index*2+1;
@@ -41,10 +61,6 @@ public class Heap {
 				tree.swap(curr, rightChild);
 			}
 		}
-	}
-	
-	public void siftUp(int index) {
-		
 	}
 	
 	public String toString() {

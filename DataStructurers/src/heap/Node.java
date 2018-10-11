@@ -20,6 +20,10 @@ public class Node {
 		return value;
 	}
 	
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
 	public int compareTo(Node otherNode) {
 		return this.value-otherNode.value;
 	}
