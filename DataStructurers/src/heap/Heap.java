@@ -52,7 +52,7 @@ public class Heap {
 			int currVal = tree.getValue(curr);
 			int leftVal = tree.getValue(leftChild);
 			int rightVal = tree.getValue(rightChild);
-			if (currVal < leftVal && currVal < rightVal) {
+			if (currVal <= leftVal && currVal <= rightVal) {
 				return;
 			} 
 			if (leftVal < rightVal) {
