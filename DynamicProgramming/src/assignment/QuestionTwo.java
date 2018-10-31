@@ -144,38 +144,44 @@ public class QuestionTwo {
 	}
 
 	public static void run(int testCaseNum) throws IOException {
-		int[] vals = { 7, 7, 7, 7, 7, 7, 7 };
+		int[] vals = {7,7,7,7,7,7,7};
+		System.out.println(Math.max(getBest(vals, 0), getBest(vals, 1)));
+	}
+	
+	public static int getBest(int[] vals, int startIndex) {
 		int[] used = new int[vals.length];
 		int[] best = new int[vals.length];
-		for (int i = 0; i < vals.length; i++) {
-			// if the left neighbor is not used
-			if (i > 0 && (used[i - 1] == 0)) {
-				if (i == vals.length-1 && used[0] == 0) {
-					best[i] = best[i-1] + vals[i];
-				}
-				best[i] = best[i - 1] + vals[i];
-				used[i] = 1;	
-			}
-			// left neighbor is used
-			else {
-				// if current is bigger than neighbor then use current
-				if (i > 0 && vals[i] > vals[i - 1]) {
-					if (i > 1) {
-						best[i] = best[i - 2] + vals[i];
-						used[i - 2] = 1;
-					} else {
-						best[i] = vals[i];
-					}
-					used[i - 1] = 0;
+		int checkLast = (startIndex == 0) ? 1 : 0;
+		for (int i = startIndex; i < vals.length-checkLast; i++) {
+			int prevI = (i < 1) ? 0 : i-1;
+			int twoPrevI = (i < 2) ? 0 : i-2;
+			if (used[prevI] == 0) {
+				best[i] = best[prevI]+vals[i];
+				used[i] = 1;
+			} 
+			//has a neighbor
+			else { 
+				//if bigger than neighbor, replace 
+				if (vals[i] > vals[prevI]) {
+					best[i] = best[twoPrevI]+vals[i];
+					used[twoPrevI] = 1;
+					used[prevI] = 0;
 					used[i] = 1;
-				} else if (i > 0) {
-					best[i] = best[i - 1];
 				} else {
-					best[i] = vals[i];
-					used[i] = 1;
+					best[i] = best[prevI];
 				}
 			}
-		}
-		System.out.println(best[best.length - 1]);
+		}	
+		return best[best.length-1-checkLast];
 	}
+	
+//	if (i >= vals.length) return -1;
+//	if (solved[i] != 0) {
+//		return solved[i];
+//	}
+//	if (i == vals.length-1 || i == vals.length-2) return vals[i];
+//	solved[i] = vals[i] + Math.max(getBest(vals, i+2, solved), getBest(vals, i+3, solved));
+//	return solved[i];
+	
+
 }
