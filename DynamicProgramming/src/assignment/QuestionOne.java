@@ -98,7 +98,7 @@ public class QuestionOne {
     }
     
     public static void run(int testCaseNum) throws IOException {
-    	int[] sequence = { 1, 17, 5, 10, 13, 15, 10, 5, 16, 8 };
+    	int[] sequence = {2,1,3};
     	int[] solutions = new int[sequence.length];
     	solutions[0] = 1;
     	for (int i = 1; i < sequence.length-1; i++) {
