@@ -70,12 +70,12 @@ public class Graph {
 	
 	public static void main(String[] args) throws IOException {
 
-		File inputFile = new File("C:\\Users\\aalex\\Dev\\GitHub\\ICS4U\\DataStructurers\\src\\graph\\TinyGraph.txt"); 
+		File inputFile = new File("C:\\Users\\aalexiev\\Dev\\GitHub\\ICS4U\\DataStructurers\\src\\graph\\TinyGraph.txt"); 
 		BufferedReader in = new BufferedReader(new FileReader(inputFile));
 		Graph g = new Graph();
 		g.fill(in);
-		DepthFirstSearch dfs = new DepthFirstSearch(g, "A");
-		System.out.println(dfs.lengthTo("E"));
+		DepthFirstSearch bfs = new DepthFirstSearch(g, "A");
+		System.out.println(bfs.lengthTo("E"));
 		
 	}
 

@@ -28,11 +28,20 @@ public class BreadthFirstSearch {
 		Queue<String> queue = new LinkedList<String>();
 		queue.add(vertex);
 		marked.add(vertex);
+		distTo.put(vertex, 0);
 		while(!queue.isEmpty()) {
-			for (String v : graph.getAdjacent(queue.remove())) {
-				
+			for (String v : graph.getAdjacent(queue.peek())) {
+				if (!marked.contains(v)) {
+					queue.add(v);
+					edgeTo.put(v, queue.peek());
+					distTo.put(v, distTo.get(queue.remove()));
+				}
 			}
 		}
+	}
+	
+	public int getDist(String vertex) {
+		return distTo.get(vertex);
 	}
 
 }
