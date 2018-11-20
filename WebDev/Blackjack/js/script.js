@@ -20,7 +20,7 @@ class CardOperations {
     }
 
     static getString(card){
-        var value = CardOperations.getValue(card.substring(0, 1))[1];
+        var value = CardOperations.getValue(card.substring(0, 1))[0];
         var suit = CardOperations.getSuit(card.substring(1))[0];
         return "("+value + " of " +suit+")";
     }
@@ -37,7 +37,7 @@ class CardOperations {
         if (value == 'j') return ["Jack", 10];
         if (value == 'k') return ["King", 10];
         if (value == 'q') return ["Queen", 10];
-        return [null, parseInt(value)];
+        return [value, parseInt(value, 10)];
     }
 
     static getCardValue(card){
@@ -55,25 +55,29 @@ function placeBet(){
 }
 
 function start(){
-    playerCards[playerCards.length] = CardOperations.getCard();
-    dealerCards[dealerCards.length] = CardOperations.getCard();
+    playerCards[0] = CardOperations.getCard();
+    dealerCards[0] = CardOperations.getCard();
     calculateScores();
     showCards();
 }
 
 function calculateScores(){
+    playerScore = 0;
     for (var i = 0; i < playerCards.length; i++){
         playerScore += CardOperations.getCardValue(playerCards[i]);
     }
+    dealerScore = 0;
     for (var i = 0; i < dealerCards.length; i++){
         dealerScore += CardOperations.getCardValue(dealerCards[i]);
     }
 }
 
 function showCards(){
+    document.getElementById("playerCards").innerHTML = "Your cards: ";
     for (var i = 0; i < playerCards.length; i++){
         document.getElementById("playerCards").innerHTML += CardOperations.getString(playerCards[i]);
     }
+    document.getElementById("dealerCards").innerHTML = "Dealer cards: ";
     for (var i = 0; i < dealerCards.length; i++){
         document.getElementById("dealerCards").innerHTML += CardOperations.getString(dealerCards[i]);
     }
@@ -83,6 +87,26 @@ function hit(){
     playerCards[playerCards.length] = CardOperations.getCard();
     calculateScores();
     showCards();
+    calculateFate();
+}
+
+function calculateFate(){
+    if (playerScore > 21) {
+        lose();
+    } else if (playerScore == 21){
+        win();
+    }
+}
+
+function lose(){
+    balance -= bet;
+    location.assign("final.html");
+    document.getElementById("result").innerHTML = "LMAO you lost...$"+bet+" your new balance is $"+balance;
+    window.location.href = "final.html";
+}
+
+function win(){
+    balance += bet;
 }
 
 function stand(){

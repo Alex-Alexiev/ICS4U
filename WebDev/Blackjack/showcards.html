@@ -2,9 +2,9 @@
     <head>
         <script src="js/script.js"></script>
     </head>
-    <body>
-        <p id="playerCards">Your cards: </p>
-        <p id="dealerCards">Dealer's cards: </p>
+    <body onload="start();">
+        <p id="playerCards"></p>
+        <p id="dealerCards"></p>
         <p>Would you like to get hit or stand?</p>
         <input type="button" value="Hit" id="hit" onclick="hit();">
         <input type="button" value="Stand" id="stand" onclick="stand();">
