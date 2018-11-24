@@ -56,7 +56,7 @@ function placeBet(){
 
 function start(){
     playerCards[0] = CardOperations.getCard();
-    dealerCards[0] = CardOperations.getCard();
+    dealerCards[0] = CardOperations.getCard();    
     calculateScores();
     showCards();
 }
