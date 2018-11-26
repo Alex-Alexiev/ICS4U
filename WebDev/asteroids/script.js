@@ -1,11 +1,13 @@
 var ship;
 var shots;
+var asteroids;
 
 function setup() {
     frameRate(60);
     createCanvas(400, 400);
-    ship = new Ship(width/2, height/2, 0.3, 0.1, 5, 0.05);
+    ship = new Ship(0,0, 0.3, 0.07, 5, 0.02);
     shots = new Shots(3, 5);
+    asteroids = new AsteroidField(5, 50, 1);
 }
 
 function draw() {
@@ -14,10 +16,12 @@ function draw() {
     stroke(255);
     ship.update();
     shots.show();
+    asteroids.show();
 }
 
 function keyTyped(){
     if (key === ' '){
-        shots.add(ship.x, ship.y, ship.directionAngle);
+        shots.add(ship.position.x, ship.position.y, ship.direction.getAngle());
     }
 }
+

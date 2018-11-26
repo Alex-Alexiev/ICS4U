@@ -1,13 +1,11 @@
 function Ship(x, y, linearAcceleration, angularAcceleration, maxSpeed, friction){
-    this.x = x;
-    this.y = y;
     this.angularAcceleration = angularAcceleration;
     this.linearAcceleration = linearAcceleration;
     this.maxSpeed = maxSpeed;
     this.friction = friction;
-    this.directionAngle = 0,
-    this.motionAngle = 0;
-    this.speed = 0;
+    this.velocity = new Vector(0,0);
+    this.direction = new Vector(0,1);
+    this.position = new Vector(x,y);
 }
 
 Ship.prototype.update = function(){
@@ -20,43 +18,46 @@ Ship.prototype.update = function(){
 Ship.prototype.accelerate = function(){
     if (keyIsPressed) {
         if (keyCode === LEFT_ARROW) {
-            //motionAngle-= angularAcceleration;
-            this.directionAngle -= this.angularAcceleration;
-        } else if (keyCode === RIGHT_ARROW) {
-            //motionAngle+= angularAcceleration;
-            this.directionAngle += this.angularAcceleration;
+            this.direction.rotate(this.angularAcceleration);
+        } 
+        if (keyCode === RIGHT_ARROW) {
+            this.direction.rotate(-this.angularAcceleration);
         }
-        if (this.speed < this.maxSpeed) {
+        if (this.velocity.getMagnitude() < this.maxSpeed) {
             if (keyCode === UP_ARROW) {
-                this.speed += this.linearAcceleration;
-                this.motionAngle = this.directionAngle;
-            } else if (keyCode === DOWN_ARROW) {
-                this.speed -= 1;
-                this.motionAngle = this.directionAngle;
-            }
+               this.velocity.add(this.direction.getScalarMultiply(this.linearAcceleration));
+            } 
         }
     }
 }
 
 Ship.prototype.checkBoundaries = function(){
-    if (this.x > width) this.x = 0;
-    else if (this.x < 0) this.x = width;
-    if (this.y > height) this.y = 0;
-    else if (this.y < 0) this.y = height;
+    if (this.position.x > width/2) this.position.x = -width/2;
+    else if (this.position.x < -width/2) this.position.x = width/2;
+    if (this.position.y > height/2) this.position.y = -height/2;
+    else if (this.position.y < -height/2) this.position.y = height/2;
 }
 
 Ship.prototype.updatePos = function(){
-    if (this.speed > 0) {
-        this.speed -= this.friction;
+    if (this.velocity.getMagnitude() > 0) {
+        this.velocity.add(this.velocity.getScalarMultiply(-1).getScalarMultiply(this.friction));
     }
-    this.x += -this.speed * sin(this.motionAngle);
-    this.y += this.speed * cos(this.motionAngle);
+    this.position.add(this.velocity);
 }
 
 Ship.prototype.draw = function() {
+    fill(0);
+    stroke(255);
     push();
-    translate(this.x, this.y);
-    rotate(this.directionAngle);
+    translate(width/2, height/2);
+    rotate(PI);
+    translate(-this.position.x, this.position.y);
+    stroke(255,0,0);
+    line(0,0, -this.direction.getScalarMultiply(100).x, this.direction.getScalarMultiply(100).y);
+    stroke(0,255,0);
+    line(0,0, -this.velocity.getScalarMultiply(100).x, this.velocity.getScalarMultiply(100).y);
+    rotate(PI/2-this.direction.getAngle());
+    stroke(255);
     triangle(0, 10, 10, -15, -10, -15);
     pop();
 }
