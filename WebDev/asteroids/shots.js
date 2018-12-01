@@ -10,12 +10,13 @@ Shots.prototype.add = function(position, velocity, direction){
 
 Shots.prototype.update= function(){
     this.clean();
-    //this.draw();
+    this.draw();
 }
 
 Shots.prototype.draw = function(){
     for(let i = 0; i < this.shotArray.length; i++){
         this.shotArray[i].draw();
+        this.shotArray[i].move();
     }
 }
 

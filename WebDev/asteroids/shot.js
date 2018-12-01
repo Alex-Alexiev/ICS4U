@@ -4,7 +4,7 @@ function Shot(position,velocity,direction, speed){
     this.velocity = new Vector(1,0);
     this.velocity.scalarMultiply(speed);
     this.velocity.rotate(direction.getAngle());
-    this.velocity.add(Vector.projection(velocity, direction));
+    this.velocity.add(Vector.projection(this.velocity, direction));
     this.distanceTraveled = 0;
     this.radius = 5;
     this.maxDistance = 500;
@@ -12,22 +12,16 @@ function Shot(position,velocity,direction, speed){
 }
 
 Shot.prototype.draw = function(){
-    if (this.show){
-        fill(255);
-        push();
-        translate(width/2, height/2);
-        rotate(PI);
-        ellipse(-this.position.x, this.position.y, this.radius, this.radius);
-        pop();
-        this.move();
-    }
+    fill(255);
+    drawEllipse(this.position, this.radius);
 }
 
 Shot.prototype.move = function() {
-    // if (this.position.getMagnitude() < this.maxDistance){
-    //     this.position.add(this.velocity);
-    // } else {
-    //     this.show = false;
-    // }
+    this.distanceTraveled += this.velocity.getMagnitude();
+    if (this.distanceTraveled < this.maxDistance){
+        this.position.add(this.velocity);
+    } else {
+        this.show = false;
+    }
     this.position.add(this.velocity);
 }

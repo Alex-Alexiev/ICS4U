@@ -11,7 +11,7 @@ function Ship(x, y, linearAcceleration, angularAcceleration, maxSpeed, friction)
 Ship.prototype.update = function(){
     this.accelerate();
     this.updatePos();
-    this.checkBoundaries();
+    this.position = checkBoundaries(this.position);
     this.draw();
 }
 
@@ -29,13 +29,6 @@ Ship.prototype.accelerate = function(){
             } 
         }
     }
-}
-
-Ship.prototype.checkBoundaries = function(){
-    if (this.position.x > width/2) this.position.x = -width/2;
-    else if (this.position.x < -width/2) this.position.x = width/2;
-    if (this.position.y > height/2) this.position.y = -height/2;
-    else if (this.position.y < -height/2) this.position.y = height/2;
 }
 
 Ship.prototype.updatePos = function(){
