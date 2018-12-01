@@ -1,23 +1,26 @@
-var shotArray = new Array();
-
 function Shots(radius, speed){
     this.radius = radius;
     this.speed = speed;
+    this.shotArray = new Array();    
 }
 
-Shots.prototype.add = function(x,y,angle){
-    shotArray.push(new Shot(x,y,this.speed, angle));
+Shots.prototype.add = function(position, velocity, direction){
+    this.shotArray.push(new Shot(position, velocity, direction, this.speed));
 }
 
-Shots.prototype.show = function(){
+Shots.prototype.update= function(){
     this.clean();
-    for(let i = 0; i < shotArray.length; i++){
-        shotArray[i].draw();
+    //this.draw();
+}
+
+Shots.prototype.draw = function(){
+    for(let i = 0; i < this.shotArray.length; i++){
+        this.shotArray[i].draw();
     }
 }
 
 Shots.prototype.clean = function(){
-    for(let i = 0; i < shotArray.length; i++){
-        if (!shotArray[i].show) shotArray.splice(i, 1);
+    for(let i = 0; i < this.shotArray.length; i++){
+        if (!this.shotArray[i].show) this.shotArray.splice(i, 1);
     }
 }

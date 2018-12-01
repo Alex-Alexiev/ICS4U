@@ -1,30 +1,33 @@
 function Asteroid(size, speed){
     this.size = size;
-    this.x = Math.floor(Math.random()*width);
-    this.y = Math.floor(Math.random()*height);
-    this.speed = speed;
-    this.direction = Math.random()*2*PI;
+    this.position = new Vector(Math.random()*width-width/2, Math.random()*height - height/2);
+    this.velocity = new Vector(1,0);
+    this.velocity.rotate(Math.random()*2*PI);
+    this.velocity.scalarMultiply(speed);
 }
 
 Asteroid.prototype.draw = function(){
+    this.move();
     fill(0);
     stroke(255);
-    ellipse(this.x,this.y, this.size, this.size);
-    this.update();
+    ellipse(this.position.x,this.position.y, this.size, this.size);
 }
 
-Asteroid.prototype.update = function() {
+Asteroid.prototype.checkCollisions = function(shotArray){
+    for (let i = 0; i < shotArray.length; i++){
+        console.log("hello");
+    }
+}
+
+Asteroid.prototype.move = function() {
     this.checkBoundaries();
-    let dx = -this.speed*sin(this.direction);
-    let dy = this.speed*cos(this.direction);
-    this.y += dy;
-    this.x += dx;
+    this.position.add(this.velocity);
 }
 
 Asteroid.prototype.checkBoundaries = function(){
-    if (this.x > width) this.x = 0;
-    else if (this.x < 0) this.x = width;
-    if (this.y > height) this.y = 0;
-    else if (this.y < 0) this.y = height;
+    if (this.position.x > width) this.position.x = 0;
+    else if (this.position.x < 0) this.position.x = width;
+    if (this.position.y > height) this.position.y = 0;
+    else if (this.position.y < 0) this.position.y = height;
 }
 

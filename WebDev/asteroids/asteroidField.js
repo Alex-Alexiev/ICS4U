@@ -5,7 +5,18 @@ function AsteroidField(num, size, speed){
     }
 }
 
-AsteroidField.prototype.show = function(){
+AsteroidField.prototype.update = function(shotArray){
+    this.checkCollisions(shotArray);
+    this.draw();
+}
+
+AsteroidField.prototype.checkCollisions = function(shotArray){
+    for (let i = 0; i < this.asteroidArray.length; i++){
+        this.asteroidArray[i].checkCollisions(shotArray);
+    }
+}
+
+AsteroidField.prototype.draw = function (){
     for (let i = 0; i < this.asteroidArray.length; i++){
         this.asteroidArray[i].draw();
     }

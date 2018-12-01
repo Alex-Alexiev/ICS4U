@@ -9,9 +9,9 @@ function Ship(x, y, linearAcceleration, angularAcceleration, maxSpeed, friction)
 }
 
 Ship.prototype.update = function(){
-    this.checkBoundaries();
-    this.updatePos();
     this.accelerate();
+    this.updatePos();
+    this.checkBoundaries();
     this.draw();
 }
 
