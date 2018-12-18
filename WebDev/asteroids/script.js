@@ -8,7 +8,7 @@ function setup() {
     //cnv.style('display', 'block');
     ship = new Ship(0,0, 0.6, 0.09, 5, 0.018);
     shots = new Shots(3, 2);
-    asteroids = new AsteroidField(10, 50, 1);
+    asteroids = new AsteroidField(50, 50, 1);
 }
 
 function draw() {

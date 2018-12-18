@@ -1,6 +1,6 @@
 function Asteroid(radius, speed){
     this.radius = radius;
-    this.position = new Vector(Math.random()*width, Math.random()*height);
+    this.position = new Vector(Math.random()*width-width/2, Math.random()*height-height/2);
     this.velocity = new Vector(1,0);
     this.velocity.rotate(Math.random()*2*PI);
     this.velocity.scalarMultiply(speed);
