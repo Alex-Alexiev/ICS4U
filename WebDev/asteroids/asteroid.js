@@ -20,7 +20,7 @@ Asteroid.prototype.checkCollisions = function(shotArray, ship){
             shot.show = false;
         }
     }
-    if (Vector.add(ship.position.getScalarMultiply(-1), this.position).getMagnitude() < this.radius/2){
+    if (Vector.add(ship.position.getScalarMultiply(-1), this.position).getMagnitude() < this.radius/2+10){
         gameOver();
     }
 }
