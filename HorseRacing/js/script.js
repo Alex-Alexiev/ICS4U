@@ -1,19 +1,17 @@
-function onOver(params) {
-    //x is an array
-    var x = document.querySelectorAll(".c1");
-    
-    for (let i = 0; i < x.length; i++) {
-        x[i].classList.add("hoverClass");        
-    }
+var players = [];
 
+function placeBets(){
+    document.getElementById("addPlayers").style.display = "none";
+    document.getElementById("placeBets").style.display = "block";
 }
 
-function onOut(params) {
-    //x is an array
-    var x = document.querySelectorAll(".c1");
-    
-    for (let i = 0; i < x.length; i++) {
-        x[i].classList.remove("hoverClass");        
-    }
-
+function watchRace(){
+    document.getElementById("placeBets").style.display = "none";
+    document.getElementById("watchRace").style.display = "block";
 }
+
+function showResults(){
+    document.getElementById("watchRace").style.display = "none";
+    document.getElementById("showResults").style.display = "block";
+}
+

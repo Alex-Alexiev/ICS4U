@@ -1,17 +1,27 @@
-p {
-    font-size: 20px;
-    color: fuchsia;
+#placeBetsDiv, #watchRace, #showResults {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    white-space: normal;
+    overflow: hidden;
+    display: none;
 }
 
-.c1 {
-    color: blue;
+#addPlayers {
+    background-color: red;
 }
 
-#p2 {
-    color: red;
+#placeBetsDiv {
+    background-color: blue; 
 }
 
-.hoverClass{
-    font-size: 30px;
-    color: aquamarine;
+#watchRace {
+    background-color: yellow;
 }
+
+#showResults {
+    background-color: green;
+}
+
