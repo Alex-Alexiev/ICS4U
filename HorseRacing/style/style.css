@@ -1,4 +1,8 @@
-#placeBetsDiv, #watchRace, #showResults {
+body {
+    font-family: sans-serif;
+}
+
+#placeBetsDiv, #watchRaceDiv, #showResultsDiv {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -9,19 +13,19 @@
     display: none;
 }
 
-#addPlayers {
-    background-color: red;
+#addPlayersDiv {
+    background-color: lightcoral;
 }
 
 #placeBetsDiv {
-    background-color: blue; 
+    background-color: lightblue; 
 }
 
-#watchRace {
+#watchRaceDiv {
     background-color: yellow;
 }
 
-#showResults {
-    background-color: green;
+#showResultsDiv {
+    background-color: lightgreen;
 }
 

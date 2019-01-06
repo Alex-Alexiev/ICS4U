@@ -1,120 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>This is the title</title>
-        <link rel="stylesheet" href="style/style.css">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-       
-        <script src="js/script.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    </head>
 
-    <script>
-            $( function() {
-
-              $("#placeBets").button().on("click", function(){
-                $("#addPlayers").hide(2000);
-                $("#placeBetsDiv").show(2000);
-              })
+<head>
+  <title>This is the title</title>
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
 
-              /*
-              var dialog, form,
-           
-                name = $( "#name" ),
-                email = $( "#email" ),
-                password = $( "#password" ),
-                allFields = $( [] ).add( name ).add( email ).add( password ),
-                tips = $( ".validateTips" );
-           
-              function updateTips( t ) {
-                tips
-                  .text( t )
-                  .addClass( "ui-state-highlight" );
-                setTimeout(function() {
-                  tips.removeClass( "ui-state-highlight", 1500 );
-                }, 500 );
-              }
-           
-              function addUser() {
-               
-                allFields.removeClass( "ui-state-error" );
-           
-                  $( "#users tbody" ).append( "<tr>" +
-                    "<td>" + name.val() + "</td>" +
-                    "<td>" + email.val() + "</td>" +
-                    "<td>" + password.val() + "</td>" +
-                  "</tr>" );
-                  dialog.dialog( "close" );
-                
-              }
-           
-              dialog = $( "#dialog-form" ).dialog({
-                autoOpen: false,
-                height: 400,
-                width: 350,
-                modal: true,
-                buttons: {
-                  "Create an account": addUser,
-                  Cancel: function() {
-                    dialog.dialog( "close" );
-                  }
-                },
-                close: function() {
-                  form[ 0 ].reset();
-                  allFields.removeClass( "ui-state-error" );
-                }
-              });
-           
-              form = dialog.find( "form" ).on( "submit", function( event ) {
-                event.preventDefault();
-                addUser();
-              });
-           
-              $( "#create-user" ).button().on( "click", function() {
-                dialog.dialog( "open" );
-              });
-              */
-            } );
-            </script>
-    <body>
-        <div id="addPlayers">
-            <p>red</p>
-            <!--
-            <div id="dialog-form" title="Create new user">
-              <p class="validateTips">All form fields are required.</p>
-                  
-                <form>
-                  <fieldset>
-                       <label for="name">Name</label>
-                       <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-                       <label for="email">Email</label>
-                       <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-                       <label for="password">Password</label>
-                       <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
-                  
-                       <!-- Allow form submission with keyboard without duplicating the dialog button --
-                       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                     </fieldset>
-                   </form>
-             </div>
-            -->
-            <!--<button id="create-user">Create new user</button>-->
-            <button id="placeBets">Place Bets</button>
-        </div>
-        <div id="placeBetsDiv">
-            <p>blue</p>
-            <button onclick="watchRace()">Watch Race</button>
-        </div>
-        <div id="watchRace">
-            <p>yellow</p>
-            <button onclick="showResults()">Show Results</button>
-        </div>
-        <div id="showResults">
-            <p>green</p>
-            <button onclick="addPlayers()">Add Players</button>
-        </div>
-    </body>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<script src="js/script.js"></script>
+
+<body>
+  <div id="addPlayersDiv">
+    <table id="playerTable" border="1">
+
+    </table>
+    <div id="newPlayerForm">
+      <form>
+        <fieldset>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="nameInput" value="Sir Mam" class="text ui-widget-content ui-corner-all">
+        </fieldset>
+      </form>
+    </div>
+    <button id="addPlayer">Add Player</button>
+    <button id="placeBets">Place Bets</button>
+  </div>
+  <div id="placeBetsDiv">
+    <form>
+      <fieldset>
+        <label for="player">Player</label>
+        <select name="player" id="playerSelect"></select>
+        <label for="horse">Horse</label>
+        <select name="horse" id="horseSelect"></select>
+        <label for="amount">Amount</label>
+        <input type="text" id="betAmount" name="betAmount min="0">
+      </fieldset>
+    </form>
+    <button id="makeBet">Submit</button>
+    <button id="watchRace">Race!</button>
+  </div>
+  <div id="watchRaceDiv">
+    <p id="winnerText">The winner is </p>
+    <button id="showResults">Show Results</button>
+  </div>
+  <div id="showResultsDiv">
+    <button id="playAgain">Play Again</button>
+  </div>
+</body>
+
 </html>
