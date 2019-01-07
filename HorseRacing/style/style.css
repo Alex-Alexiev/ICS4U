@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
 }
 
-#placeBetsDiv, #watchRaceDiv, #showResultsDiv {
+#placeBetsDiv, #watchRaceDiv {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -23,9 +23,5 @@ body {
 
 #watchRaceDiv {
     background-color: yellow;
-}
-
-#showResultsDiv {
-    background-color: lightgreen;
 }
 
