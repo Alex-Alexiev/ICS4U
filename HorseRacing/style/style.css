@@ -1,8 +1,23 @@
 body {
     font-family: sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
 }
 
-#placeBetsDiv, #watchRaceDiv {
+#gameTitle {
+    margin: 0.5em;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+#startDiv {
+    margin-top: 5em;
+    text-align: center;
+}
+
+#addPlayersDiv, #placeBetsDiv, #watchRaceDiv {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -13,15 +28,22 @@ body {
     display: none;
 }
 
-#addPlayersDiv {
-    background-color: lightcoral;
+table{
+    margin: 3em auto;
+    border-collapse: collapse;
+    border: 1px solid white;
 }
 
-#placeBetsDiv {
-    background-color: lightblue; 
+#bettingForm {
+    border: none;
 }
 
-#watchRaceDiv {
-    background-color: yellow;
+input {
+    display: block;
+    font-size:11px;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:70px;
+    margin:2px 0 20px 10px; 
 }
 

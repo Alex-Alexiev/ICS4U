@@ -7,16 +7,21 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
 
-
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <script src="js/script.js"></script>
 
 <body>
+  <div id="gameTitle">Colour Racing</div>
+  <div id="startDiv">
+    <button id="startGame">Start</button>
+  </div>
+  <div id="startAnimation">
+    <canvas id="animation"></canvas>
+  </div>
   <div id="addPlayersDiv">
-    <table id="playerTable" border="1">
-
+    <table id="playerTable" align="center" border="1">
     </table>
     <div id="newPlayerForm">
       <form>
@@ -30,22 +35,41 @@
     <button id="placeBets">Place Bets</button>
   </div>
   <div id="placeBetsDiv">
-    <form>
-      <fieldset>
-        <label for="player">Player</label>
-        <select name="player" id="playerSelect"></select>
-        <label for="horse">Horse</label>
-        <select name="horse" id="horseSelect"></select>
-        <label for="amount">Amount</label>
-        <input type="text" id="betAmount" name="betAmount min="0">
-      </fieldset>
-    </form>
-    <button id="makeBet">Submit</button>
+    <div id="error" title="Invalid Bet">
+      <p>Make sure you have enough money and that you have selected one of each option.</p>
+    </div>
+    <table id="bettingForm">
+      <tr>
+        <td>Player</td>
+        <td><select name="player" id="playerSelect"></select></td>
+      </tr>
+      <tr>
+        <td>Colour</td>
+        <td><select name="colour" id="colourSelect"></select></td>
+      </tr>
+      <tr>
+        <td>Amount</td>
+        <td><input type="text" id="betAmount" name="betAmount min=" 0" value="0"></td>
+      </tr>
+      <tr>
+        <td>Bet Type</td>
+        <td>
+          <select name="type" id="betType">
+            <option selected disabled hidden>--select an option--</option>
+            <option>Win</option>
+            <option>Place</option>
+            <option>Show</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <button id="submitBet">Make Bet</button>
     <button id="watchRace">Race!</button>
   </div>
   <div id="watchRaceDiv">
-    <p id="winnerText">The winner is </p>
-    <button id="showResults">Show Results</button>
+    <canvas id="race"></canvas>
+    <div id="results" title="Winners">
+    </div>
   </div>
 </body>
 
