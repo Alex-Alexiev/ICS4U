@@ -1,36 +1,36 @@
 var START_BALANCE = 500;
-var ANIMATION_TIME = 100;
+var ANIMATION_TIME = 250;
 
 var players = [];
 
 var colours = [{
-        name: "white",
-        position: 0
-    },
-    {
-        name: "pink",
-        position: 0
-    },
-    {
-        name: "red",
-        position: 0
-    },
-    {
-        name: "yellow",
-        position: 0
-    },
-    {
-        name: "purple",
-        position: 0
-    },
-    {
-        name: "green",
-        position: 0
-    },
-    {
-        name: "blue",
-        position: 0
-    }
+    name: "white",
+    position: 0
+},
+{
+    name: "pink",
+    position: 0
+},
+{
+    name: "red",
+    position: 0
+},
+{
+    name: "yellow",
+    position: 0
+},
+{
+    name: "purple",
+    position: 0
+},
+{
+    name: "green",
+    position: 0
+},
+{
+    name: "blue",
+    position: 0
+}
 ];
 
 var bets = [];
@@ -44,7 +44,9 @@ $(function () {
     $("#startGame").button().on("click", function () {
         $("#startDiv").hide();
         startAnimation();
-        $("#addPlayersDiv").show(ANIMATION_TIME);
+        setTimeout(function () {
+            $("#addPlayersDiv").show(ANIMATION_TIME);
+        }, 1100);
     });
 
     userEntry = $("#newPlayerForm").dialog({
@@ -99,8 +101,9 @@ $(function () {
         modal: true
     });
 
-    $("#backToPlayer").button().on("click", function(){
+    $("#backToPlayer").button().on("click", function () {
         $("#placeBetsDiv").hide(ANIMATION_TIME);
+        updatePlayerTable();
         $("#addPlayersDiv").show(ANIMATION_TIME);
     });
 
@@ -143,7 +146,7 @@ function startAnimation() {
     let canvas = $("#animation")[0];
     let ctx = canvas.getContext('2d');
     canvas.width = colours.length * 30;
-    canvas.height = window.innerHeight/2;
+    canvas.height = window.innerHeight;
     let finished = 0;
 
     function iteration() {
@@ -187,12 +190,14 @@ function addPlayer() {
  * balance to update the HTML table showing those values
  */
 function updatePlayerTable() {
-    $("#playerTable").empty();
-    $("#playerTable").append("<th>Name</th><th>Balance</th>")
-    for (let i = 0; i < players.length; i++) {
-        $("#playerTable").append("<tr>" +
-            "<td>" + players[i].name + "</td>" +
-            "<td>" + players[i].balance + "</td>");
+    if (players.length > 0) {
+        $("#playerTable").empty();
+        $("#playerTable").append("<th>Name</th><th>Balance</th>")
+        for (let i = 0; i < players.length; i++) {
+            $("#playerTable").append("<tr>" +
+                "<td>" + players[i].name + "</td>" +
+                "<td>" + players[i].balance + "</td>");
+        }
     }
 }
 
@@ -233,7 +238,7 @@ function makeBet() {
     if (name != null && type != null && colour != null) {
         for (let i = 0; i < players.length; i++) {
             if (name == players[i].name) {
-                if (amount < players[i].balance && amount > 0) {
+                if (amount <= players[i].balance && amount > 0) {
                     valid = true;
                 }
                 break;
@@ -271,34 +276,52 @@ function race() {
     canvas.width = window.innerWidth;
     canvas.height = colours.length * 30;
     let finished = 0;
-
-    function iteration() {
+    let count = 3;
+    ctx.font = "75px Arial";
+    ctx.fillStyle = "white";
+    function countOnce(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < colours.length; i++) {
-            if (colours[i].position < canvas.width) {
-                let step = Math.floor(Math.random() * 20) + 1;
-                colours[i].position += step;
-                if (colours[i].position >= canvas.width) {
-                    winners.push(colours[i]);
-                    finished++;
-                }
+        ctx.fillText(""+count, canvas.width/2, canvas.height/2);
+        setTimeout(function() {
+            if (count > 1){
+                count--;
+                countOnce();
             }
-            ctx.fillStyle = colours[i].name;
-            ctx.fillRect(colours[i].position, i * 30, 30, 30);
-        }
-        setTimeout(function () {
-            if (winners.length < colours.length) {
-                iteration();
-            } else {
-                $("#results").empty();
-                for (let i = 0; i < 3; i++) {
-                    $("#results").append("<p>" + (i + 1) + ": " + winners[i].name);
-                }
-                $("#results").dialog("open");
-            }
-        }, 50);
+        }, 1000);
     }
-    iteration();
+    countOnce();
+    setTimeout(function () {
+        var finishLine = new Image();
+        finishLine.src = "../checkered.jpg";
+        function iteration() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(finishLine, canvas.width - 100, 0);
+            for (let i = 0; i < colours.length; i++) {
+                if (colours[i].position < canvas.width) {
+                    let step = Math.floor(Math.random() * 20) + 1;
+                    colours[i].position += step;
+                    if (colours[i].position >= canvas.width) {
+                        winners.push(colours[i]);
+                        finished++;
+                    }
+                }
+                ctx.fillStyle = colours[i].name;
+                ctx.fillRect(colours[i].position, i * 30, 30, 30);
+            }
+            setTimeout(function () {
+                if (winners.length < colours.length) {
+                    iteration();
+                } else {
+                    $("#results").empty();
+                    for (let i = 0; i < 3; i++) {
+                        $("#results").append("<p>" + (i + 1) + ": " + winners[i].name);
+                    }
+                    $("#results").dialog("open");
+                }
+            }, 50);
+        }
+        iteration();
+    }, 3000);
 }
 
 /**
