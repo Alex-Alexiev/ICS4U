@@ -1,15 +1,37 @@
 var START_BALANCE = 500;
+var ANIMATION_TIME = 100;
 
 var players = [];
 
-var colours = [
-    { name: "white", position: 0 },
-    { name: "pink", position: 0 },
-    { name: "red", position: 0 },
-    { name: "yellow", position: 0 },
-    { name: "purple", position: 0 },
-    { name: "green", position: 0 },
-    { name: "blue", position: 0 }];
+var colours = [{
+        name: "white",
+        position: 0
+    },
+    {
+        name: "pink",
+        position: 0
+    },
+    {
+        name: "red",
+        position: 0
+    },
+    {
+        name: "yellow",
+        position: 0
+    },
+    {
+        name: "purple",
+        position: 0
+    },
+    {
+        name: "green",
+        position: 0
+    },
+    {
+        name: "blue",
+        position: 0
+    }
+];
 
 var bets = [];
 
@@ -22,23 +44,39 @@ $(function () {
     $("#startGame").button().on("click", function () {
         $("#startDiv").hide();
         startAnimation();
-        $("#addPlayersDiv").show(1000);
+        $("#addPlayersDiv").show(ANIMATION_TIME);
     });
 
     userEntry = $("#newPlayerForm").dialog({
         autoOpen: false,
         show: {
             effect: "blind",
-            duration: 1000
+            duration: ANIMATION_TIME
         },
+        hide: {
+            effect: "blind",
+            duration: ANIMATION_TIME
+        },
+        width: 400,
+        height: 300,
         modal: true,
         buttons: {
             "Add Player": function () {
                 addPlayer();
-                updatePlayerTable();
+            },
+            Cancel: function () {
                 userEntry.dialog("close");
             }
+        },
+        close: function () {
+            playerForm[0].reset();
         }
+
+    });
+
+    playerForm = userEntry.find("form").on("submit", function (event) {
+        event.preventDefault();
+        addPlayer();
     });
 
     $("#addPlayer").button().on("click", function () {
@@ -46,9 +84,9 @@ $(function () {
     });
 
     $("#placeBets").button().on("click", function () {
-        $("#addPlayersDiv").hide(1000);
+        $("#addPlayersDiv").hide(ANIMATION_TIME);
         updateBetForm();
-        $("#placeBetsDiv").show(1000);
+        $("#placeBetsDiv").show(ANIMATION_TIME);
     });
 
     $("#playerSelect").selectmenu();
@@ -61,13 +99,18 @@ $(function () {
         modal: true
     });
 
+    $("#backToPlayer").button().on("click", function(){
+        $("#placeBetsDiv").hide(ANIMATION_TIME);
+        $("#addPlayersDiv").show(ANIMATION_TIME);
+    });
+
     $("#submitBet").button().on("click", function () {
         makeBet();
     });
 
     $("#watchRace").button().on("click", function () {
-        $("#placeBetsDiv").hide(1000);
-        $("#watchRaceDiv").show(1000);
+        $("#placeBetsDiv").hide(ANIMATION_TIME);
+        $("#watchRaceDiv").show(ANIMATION_TIME);
         race();
     });
 
@@ -75,26 +118,19 @@ $(function () {
         autoOpen: false,
         show: {
             effect: "blind",
-            duration: 1000
+            duration: ANIMATION_TIME
         },
         hide: {
             effect: "blind",
-            duration: 1000
+            duration: ANIMATION_TIME
         },
         modal: true,
         close: function () {
             calculateResults();
-            $("#watchRaceDiv").hide(1000);
-            $("#addPlayersDiv").show(1000);
+            $("#watchRaceDiv").hide(ANIMATION_TIME);
+            $("#addPlayersDiv").show(ANIMATION_TIME);
             updatePlayerTable();
         }
-    });
-
-    $("#showResults").button().on("click", function () {
-        calculateResults();
-        $("#watchRaceDiv").hide(1000);
-        $("#addPlayersDiv").show(1000);
-        updatePlayerTable();
     });
 
 });
@@ -107,8 +143,9 @@ function startAnimation() {
     let canvas = $("#animation")[0];
     let ctx = canvas.getContext('2d');
     canvas.width = colours.length * 30;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight/2;
     let finished = 0;
+
     function iteration() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < colours.length; i++) {
@@ -125,9 +162,9 @@ function startAnimation() {
             if (finished < colours.length) {
                 iteration();
             } else {
-                $("#startAnimation").hide(500);
+                $("#startAnimation").hide(ANIMATION_TIME);
             }
-        }, 15);
+        }, 12);
     }
     iteration();
 }
@@ -141,6 +178,8 @@ function addPlayer() {
         name: $("#nameInput").val(),
         balance: START_BALANCE
     });
+    userEntry.dialog("close");
+    updatePlayerTable();
 }
 
 /**
@@ -163,6 +202,7 @@ function updatePlayerTable() {
  * added players 
  */
 function updateBetForm() {
+    $("#bettingForm")[0].reset();
     $("#playerSelect").empty();
     $("#playerSelect").append($("<option selected disabled hidden></option>").html("--select an option--"));
     $.each(players, function (i, p) {
@@ -175,7 +215,7 @@ function updateBetForm() {
         let name = colours[i].name;
         $("#colourSelect").append($("<option></option>").html(name));
     });
-    $('select').each(function(){
+    $('select').each(function () {
         $(this).find('option:first').prop('selected', 'selected');
     });
 }
@@ -185,27 +225,27 @@ function updateBetForm() {
  * information from the betting form 
  */
 function makeBet() {
-    let name =  $("#playerSelect").val();
+    let name = $("#playerSelect").val();
     let amount = parseInt($("#betAmount").val());
-    let type =  $("#betType").val();
+    let type = $("#betType").val();
     let colour = $("#colourSelect").val();
     let valid = false;
-    if (name != null && type != null && colour != null){
-        for (let i = 0; i < players.length; i++){
-            if (name == players[i].name){
-                if (amount < players[i].balance && amount > 0){
+    if (name != null && type != null && colour != null) {
+        for (let i = 0; i < players.length; i++) {
+            if (name == players[i].name) {
+                if (amount < players[i].balance && amount > 0) {
                     valid = true;
                 }
                 break;
             }
         }
     }
-    if (!valid){
+    if (!valid) {
         $("#error").dialog("open");
         updateBetForm();
     }
     bets.push({
-        name:name,
+        name: name,
         colour: colour,
         amount: amount,
         type: type
@@ -224,7 +264,6 @@ function makeBet() {
  * to show the winners
  */
 function race() {
-
     reset();
     $("#winnerText").empty()
     let canvas = $("#race")[0];
@@ -232,6 +271,7 @@ function race() {
     canvas.width = window.innerWidth;
     canvas.height = colours.length * 30;
     let finished = 0;
+
     function iteration() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < colours.length; i++) {

@@ -23,12 +23,11 @@
   <div id="addPlayersDiv">
     <table id="playerTable" align="center" border="1">
     </table>
-    <div id="newPlayerForm">
+    <div id="newPlayerForm" title="Add Player">
       <form>
-        <fieldset>
-          <label for="name">Name</label>
-          <input type="text" name="name" id="nameInput" value="Sir Mam" class="text ui-widget-content ui-corner-all">
-        </fieldset>
+        <label for="name">Player Name</label>
+        <input type="text" name="name" id="nameInput">
+        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
       </form>
     </div>
     <button id="addPlayer">Add Player</button>
@@ -38,32 +37,25 @@
     <div id="error" title="Invalid Bet">
       <p>Make sure you have enough money and that you have selected one of each option.</p>
     </div>
-    <table id="bettingForm">
-      <tr>
-        <td>Player</td>
-        <td><select name="player" id="playerSelect"></select></td>
-      </tr>
-      <tr>
-        <td>Colour</td>
-        <td><select name="colour" id="colourSelect"></select></td>
-      </tr>
-      <tr>
-        <td>Amount</td>
-        <td><input type="text" id="betAmount" name="betAmount min=" 0" value="0"></td>
-      </tr>
-      <tr>
-        <td>Bet Type</td>
-        <td>
-          <select name="type" id="betType">
-            <option selected disabled hidden>--select an option--</option>
-            <option>Win</option>
-            <option>Place</option>
-            <option>Show</option>
-          </select>
-        </td>
-      </tr>
-    </table>
-    <button id="submitBet">Make Bet</button>
+    <div>
+      <form id="bettingForm">
+        <label for="player">Player</label>
+        <select name="player" id="playerSelect"></select>
+        <label for="colour">Colour</label>
+        <select name="colour" id="colourSelect"></select>
+        <label for="betAmount">Bet Amount</label>
+        <input type="text" id="betAmount" name="betAmount min=" 0" value="0">
+        <label for="type">Bet Type</label>
+        <select name="type" id="betType">
+          <option selected disabled hidden>--select an option--</option>
+          <option>Win</option>
+          <option>Place</option>
+          <option>Show</option>
+        </select>
+      </form>
+    </div>
+    <button id="backToPlayer">Back</button>
+    <button id="submitBet">Make Bet</button>            
     <button id="watchRace">Race!</button>
   </div>
   <div id="watchRaceDiv">
