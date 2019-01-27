@@ -292,7 +292,7 @@ function race() {
     countOnce();
     setTimeout(function () {
         var finishLine = new Image();
-        finishLine.src = "../checkered.jpg";
+        finishLine.src = "checkered.jpg";
         function iteration() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(finishLine, canvas.width - 100, 0);
