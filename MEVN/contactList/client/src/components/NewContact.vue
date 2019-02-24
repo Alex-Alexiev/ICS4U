@@ -1,0 +1,108 @@
+<template>
+  <div class="contacts">
+    <h1>Add Contact</h1>
+    <div class="form">
+      <div>
+        <input type="text" name="firstName" placeholder="FIRST NAME" v-model="firstName">
+      </div>
+      <div>
+        <input type="text" name="lastName" placeholder="LAST NAME" v-model="lastName">
+      </div>
+      <div>
+        <input type="text" name="phoneNumber" placeholder="XXX-YYY-ZZZZ" v-model="phoneNumber">
+      </div>
+      <div>
+        <input type="text" name="streetAddress" placeholder="STREET ADDRESS" v-model="streetAddress">
+      </div>
+      <div>
+        <input type="text" name="city" placeholder="CITY" v-model="city">
+      </div>
+      <div>
+        <select name="provinceCode" v-model="provinceCode">
+          <option value="NL">NL</option>
+          <option value="PE">PE</option>
+          <option value="NS">NS</option>
+          <option value="NB">NB</option>
+          <option value="QC">QC</option>
+          <option value="ON">ON</option>
+          <option value="MB">MB</option>
+          <option value="SK">SK</option>
+          <option value="AB">AB</option>
+          <option value="BC">BC</option>
+          <option value="YT">YT</option>
+          <option value="NT">NT</option>
+          <option value="NU">NU</option>
+        </select>
+      </div>
+      <div>
+        <input type="text" name="postalCode" placeholder="POSTAL CODE" v-model="postalCode">
+      </div>
+      <div>
+        <input type="text" name="email" placeholder="EMAIL" v-model="email">
+      </div>
+      <div>
+        <button class="app_contact_btn" @click="addContact">Create Contact</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import ContactService from "@/services/ContactService";
+export default {
+  name: "NewContact",
+  data() {
+    return {
+      firstName: "", 
+      lastName: "", 
+      phoneNumber: "", 
+      streetAddress: "", 
+      city: "", 
+      provinceCode: "", 
+      postalCode: "", 
+      email: ""
+    };
+  },
+  methods: {
+    async addContact() {
+      await ContactService.addContact({
+        firstName: this.firstName,
+        lastName: this.lastName,
+        phoneNumber: this.phoneNumber,
+        streetAddress: this.streetAddress,
+        city: this.city,
+        provinceCode: this.provinceCode,
+        postalCode: this.postalCode,
+        email: this.email
+      });
+      this.$router.push({ name: "Contacts" });
+    }
+  }
+};
+</script>
+<style type="text/css">
+.form input,
+.form textarea {
+  width: 500px;
+  padding: 10px;
+  border: 1px solid #e0dede;
+  outline: none;
+  font-size: 12px;
+}
+.form div {
+  margin: 20px;
+}
+.app_contact_btn {
+  background: #4d7ef7;
+  color: #fff;
+  padding: 10px 80px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  width: 520px;
+  border: none;
+  cursor: pointer;
+}
+</style>
+
+
