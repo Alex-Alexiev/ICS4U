@@ -1,8 +1,8 @@
 import Api from '@/services/Api'
 
 export default {
-  fetchContacts () {
-    return Api().get('contacts')
+  fetchContacts (params) {
+    return Api().get('contacts'+"?sorter="+params.sorter+"&direction="+params.direction+"&searchparam="+params.searchParam)
   },
 
   addContact (params){

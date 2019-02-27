@@ -12,7 +12,12 @@
         <input type="text" name="phoneNumber" placeholder="XXX-YYY-ZZZZ" v-model="phoneNumber">
       </div>
       <div>
-        <input type="text" name="streetAddress" placeholder="STREET ADDRESS" v-model="streetAddress">
+        <input
+          type="text"
+          name="streetAddress"
+          placeholder="STREET ADDRESS"
+          v-model="streetAddress"
+        >
       </div>
       <div>
         <input type="text" name="city" placeholder="CITY" v-model="city">
@@ -53,30 +58,71 @@ export default {
   name: "NewContact",
   data() {
     return {
-      firstName: "", 
-      lastName: "", 
-      phoneNumber: "", 
-      streetAddress: "", 
-      city: "", 
-      provinceCode: "", 
-      postalCode: "", 
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      streetAddress: "",
+      city: "",
+      provinceCode: "",
+      postalCode: "",
       email: ""
     };
   },
   methods: {
+    isValid: function isValid() {
+      var valid = true;
+      var regPhone = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/i;
+      var regPostalCode = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/i;
+      var regEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i;
+      if (this.firstName.length <= 0){
+        alert("first name")
+        valid = false;
+      }
+      if (this.lastName.length <= 0){
+        alert("last name")
+        valid = false;
+      }
+      if (!regPhone.test(this.phoneNumber)){
+        alert("bad phone");
+        valid = false;
+      }
+      if (this.streetAddress.length <= 0){
+        alert("address")
+        valid = false;
+      }
+      if (this.city.length <= 0){
+        alert("city")
+        valid = false;
+      }
+      if (this.provinceCode.length <= 0){
+        alert("province")
+        valid = false;
+      }
+      if (!regPostalCode.test(this.postalCode)){
+        alert("bad postal code");
+        valid = false;
+      }
+      if (!regEmail.test(this.email)){
+        alert("bad email");
+        valid = false;
+      }
+      return valid;
+    },
     async addContact() {
-      await ContactService.addContact({
-        firstName: this.firstName,
-        lastName: this.lastName,
-        phoneNumber: this.phoneNumber,
-        streetAddress: this.streetAddress,
-        city: this.city,
-        provinceCode: this.provinceCode,
-        postalCode: this.postalCode,
-        email: this.email
-      });
-      this.$router.push({ name: "Contacts" });
-    }
+      if (this.isValid()) {
+        await ContactService.addContact({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          phoneNumber: this.phoneNumber,
+          streetAddress: this.streetAddress,
+          city: this.city,
+          provinceCode: this.provinceCode,
+          postalCode: this.postalCode,
+          email: this.email
+        });
+        this.$router.push({ name: "Contacts" });
+      }
+    }    
   }
 };
 </script>
